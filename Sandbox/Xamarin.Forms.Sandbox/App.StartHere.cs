@@ -33,7 +33,7 @@ namespace Xamarin.Forms.Sandbox
             else if (useTabPage)
                 MainPage = new TabPage();
             else
-                MainPage = new ShellPage();
+                MainPage = new MyShell();
         }
 
         public static Application GetApplication()

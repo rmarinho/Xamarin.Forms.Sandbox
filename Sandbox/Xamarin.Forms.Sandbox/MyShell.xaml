@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="Xamarin.Forms.Sandbox.MyShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Xamarin.Forms.Sandbox">
+
+    <Shell.BindingContext>
+        <local:ShellViewModel />
+    </Shell.BindingContext>
+
+    <!--  Login  -->
+    <ShellItem IsVisible="{Binding IsNotLogged}" Route="login">
+        <ShellContent>
+            <local:Page1 />
+        </ShellContent>
+    </ShellItem>
+
+    <!--  Logado  -->
+    <FlyoutItem Title="Home" Route="home">
+        <ShellContent ContentTemplate="{DataTemplate local:Page2}" />
+    </FlyoutItem>
+
+    <FlyoutItem
+        Title="Segredo"
+        IsVisible="{Binding IsAdm}"
+        Route="segredo">
+        <ShellContent ContentTemplate="{DataTemplate local:SecretPage}" />
+    </FlyoutItem>
+
+    <MenuItem Command="{Binding LogOutCommand}" Text="Log Out" />
+</Shell>
