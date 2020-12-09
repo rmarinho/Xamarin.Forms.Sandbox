@@ -3,19 +3,18 @@
     x:Class="Xamarin.Forms.Sandbox.Page2"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:Xamarin.Forms.Sandbox">
+    xmlns:vm="clr-namespace:Xamarin.Forms.Sandbox"
+    Title="Página Inicial">
 
     <ContentPage.BindingContext>
         <vm:MainViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
-        <StackLayout>
-            <Button
-                Command="{Binding NavigateCommand}"
-                HorizontalOptions="CenterAndExpand"
-                Text="Navigate"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout>
+        <Button
+            Command="{Binding NavigateCommand}"
+            HorizontalOptions="CenterAndExpand"
+            Text="Navigate"
+            VerticalOptions="CenterAndExpand" />
+    </StackLayout>
 </ContentPage>

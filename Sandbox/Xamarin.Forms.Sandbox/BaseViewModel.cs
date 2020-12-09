@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -29,8 +30,6 @@ namespace Xamarin.Forms.Sandbox
 			set => SetProperty(ref isAdm, value);
 		}
 
-		Shell CurrentShell => Shell.Current;
-
 		public bool IsNotLogged => !IsLogged;
 
 		public Command LogInCommand { get; }
@@ -48,7 +47,6 @@ namespace Xamarin.Forms.Sandbox
 			CurrentShell.FlyoutBehavior = FlyoutBehavior.Disabled;
 			CurrentShell.FlyoutIsPresented = false;
 			IsLogged = false;
-			//return Task.CompletedTask;
 			return CurrentShell.GoToAsync("///login");
 		}
 
@@ -62,25 +60,26 @@ namespace Xamarin.Forms.Sandbox
 	sealed class MainViewModel : BaseViewModel
 	{
 		bool isFromCommand;
+
 		public MainViewModel()
 		{
-			Navigation.InterceptNavigation[typeof(MainViewModel)] = (async () =>
+			Navigation.InterceptNavigation[Key] = (async () =>
 			{
 				if (!isFromCommand)
 					return true;
 
 				var result = await Shell.Current.DisplayAlert("Tem ctz?", "Quer sair dessa tela?", "Sim", "Não");
+				isFromCommand = false;
 				return result;
 			});
 
 			NavigateCommand = new AsyncCommand(NavigateCommandExecute);
 		}
 
-		async Task NavigateCommandExecute()
+		Task NavigateCommandExecute()
 		{
 			isFromCommand = true;
-			await Navigation.GoToAsync(nameof(StartViewModel));
-			isFromCommand = false;
+			return Navigation.GoToAsync(nameof(StartViewModel));
 		}
 	}
 
@@ -110,7 +109,7 @@ namespace Xamarin.Forms.Sandbox
 		public SecretViewModel()
 		{
 			NavigateCommand = new AsyncCommand(NavigateCommandExecute);
-			Navigation.InterceptNavigation[typeof(SecretViewModel)] = async () =>
+			Navigation.InterceptNavigation[Key] = async () =>
 			{
 				if (IsNullOrEmpty(Name) || IsNullOrEmpty(Password))
 				{
@@ -121,7 +120,7 @@ namespace Xamarin.Forms.Sandbox
 			};
 		}
 
-		Task NavigateCommandExecute() => Shell.Current.GoToAsync(nameof(FinalViewModel), new Dictionary<string, object>
+		Task NavigateCommandExecute() => Navigation.GoToAsync(nameof(FinalViewModel), new Dictionary<string, object>
 		{
 			{nameof(Name), Name },
 			{nameof(Password), Password }
@@ -147,8 +146,52 @@ namespace Xamarin.Forms.Sandbox
 		}
 	}
 
+	sealed class FlyoutDimensionsViewModel : BaseViewModel
+	{
+		public Command HeightCommand { get; }
+		public Command WidthCommand { get; }
+		public Command DefaultCommand { get; }
+
+		readonly (double height, double width) defaultValues;
+
+		public FlyoutDimensionsViewModel()
+		{
+			HeightCommand = new Command<string>(HeightCommandExecute);
+			WidthCommand = new Command<string>(WidthCommandExecute);
+			defaultValues = (Shell.GetFlyoutHeight(CurrentShell), Shell.GetFlyoutWidth(CurrentShell));
+			DefaultCommand = new Command(DefaultCommandExecute);
+		}
+
+		void DefaultCommandExecute()
+		{
+			Shell.SetFlyoutHeight(CurrentShell, defaultValues.height);
+			Shell.SetFlyoutWidth(CurrentShell, defaultValues.width);
+		}
+
+		void WidthCommandExecute(string w)
+		{
+			if (double.TryParse(w, out var width))
+				Shell.SetFlyoutWidth(CurrentShell, width);
+			else
+				CurrentShell.DisplayAlert("PANIC!", "O valor precisar ser \"double\"! ", "Ok");
+		}
+
+		void HeightCommandExecute(string h)
+		{
+			if (double.TryParse(h, out var height))
+				Shell.SetFlyoutHeight(CurrentShell, height);
+			else
+				CurrentShell.DisplayAlert("PANIC!", "O valor precisar ser \"double\"! ", "Ok");
+		}
+	}
+
 	public abstract class BaseViewModel : INotifyPropertyChanged
 	{
+
+		protected Shell CurrentShell => Shell.Current;
+
+		public string Key { get; } = Guid.NewGuid().ToString();
+
 		protected NavigationService Navigation => NavigationService.Current;
 
 		bool isBusy = false;

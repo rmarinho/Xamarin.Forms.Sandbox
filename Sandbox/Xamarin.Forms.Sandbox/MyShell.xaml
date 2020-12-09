@@ -18,7 +18,11 @@
 
     <!--  Logado  -->
     <FlyoutItem Title="Home" Route="home">
-        <ShellContent ContentTemplate="{DataTemplate local:Page2}" />
+        <ShellContent Title="CheckPage" ContentTemplate="{DataTemplate local:Page2}" />
+        <ShellContent
+            Title="Beta"
+            ContentTemplate="{DataTemplate local:FlyoutDimensions}"
+            IsVisible="{Binding IsAdm}" />
     </FlyoutItem>
 
     <FlyoutItem
@@ -29,4 +33,56 @@
     </FlyoutItem>
 
     <MenuItem Command="{Binding LogOutCommand}" Text="Log Out" />
+
+    <!--  FlyoutTemplate  -->
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="Azure">
+                <Image HeightRequest="90" Source="https://raw.githubusercontent.com/xamarin/XamarinCommunityToolkit/main/assets/XamarinCommunityToolkit_128x128.png" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="Header template"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <!--  Flyout Footer  -->
+    <Shell.FlyoutFooter>
+
+        <Grid BackgroundColor="Fuschia" HeightRequest="90">
+            <Image Source="https://raw.githubusercontent.com/BurgerMonkeys/burger-monkeys-app/main/BurgerMonkeys/BurgerMonkeys.Android/Resources/mipmap-xxxhdpi/icon.png" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalTextAlignment="Center"
+                Text="Footer View"
+                TextColor="White"
+                VerticalTextAlignment="Center" />
+        </Grid>
+
+    </Shell.FlyoutFooter>
+
+    <!--  Backdrop color  -->
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="#8A2387" />
+            <GradientStop Offset="0.6" Color="#E94057" />
+            <GradientStop Offset="1.0" Color="#F27121" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+
+    <!--  Flyout Template  -->
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Label
+                FontSize="16"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Text}"
+                TextColor="Blue" />
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
 </Shell>

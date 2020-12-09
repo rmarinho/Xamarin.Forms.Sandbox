@@ -5,10 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Login">
-
     <StackLayout VerticalOptions="CenterAndExpand">
         <Button Command="{Binding LogInCommand}" Text="LogIn" />
-
         <StackLayout Orientation="Horizontal" Spacing="3">
             <CheckBox IsChecked="{Binding IsAdm}" />
             <Label Text="Admin mode" VerticalTextAlignment="Center" />

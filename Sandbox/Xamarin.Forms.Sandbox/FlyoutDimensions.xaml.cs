@@ -9,13 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace Xamarin.Forms.Sandbox
 {
-	public partial class MyShell
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class FlyoutDimensions : ContentPage
 	{
-		public MyShell()
+		public FlyoutDimensions()
 		{
 			InitializeComponent();
-			FlyoutIsPresented = false;
-			FlyoutBehavior = FlyoutBehavior.Disabled;
 		}
 	}
 }

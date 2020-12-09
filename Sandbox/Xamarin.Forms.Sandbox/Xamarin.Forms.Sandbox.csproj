@@ -50,6 +50,12 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="FlyoutDimensions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
   
   
   <!--<ItemGroup>

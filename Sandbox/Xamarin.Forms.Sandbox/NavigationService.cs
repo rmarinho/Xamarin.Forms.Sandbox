@@ -10,7 +10,7 @@ namespace Xamarin.Forms.Sandbox
 		bool isNavigateAllowed;
 
 		static readonly Lazy<NavigationService> navigation =
-			new Lazy<NavigationService>(() => new NavigationService());
+			new Lazy<NavigationService>(() => new NavigationService(), false);
 
 		public static NavigationService Current => navigation.Value;
 
@@ -18,16 +18,13 @@ namespace Xamarin.Forms.Sandbox
 
 		Page CurrentPage => Shell.CurrentPage;
 
-		//public Func<Task<bool>> InterceptNavigation { get; set; }
-
-		public Dictionary<Type, Func<Task<bool>>> InterceptNavigation { get; }
+		public Dictionary<string, Func<Task<bool>>> InterceptNavigation { get; } = new Dictionary<string, Func<Task<bool>>>();
 
 		NavigationService()
 		{
 			RegisterRoutes();
 			Shell.Navigated += OnShellNavigated;
 			Shell.Navigating += OnShellNavigating;
-			InterceptNavigation = new Dictionary<Type, Func<Task<bool>>>();
 
 			static void RegisterRoutes()
 			{
@@ -40,8 +37,9 @@ namespace Xamarin.Forms.Sandbox
 
 		async void OnShellNavigating(object sender, ShellNavigatingEventArgs e)
 		{
-			InterceptNavigation.TryGetValue(CurrentPage.BindingContext.GetType(),out var task);
-			if (task is { }) // InterceptNavigation != null
+			var key = (CurrentPage.BindingContext as BaseViewModel).Key;
+			InterceptNavigation.TryGetValue(key, out var task);
+			if (task is { }) // task != null
 			{
 				var deferral = e.GetDeferral();
 				var result = await task();
