@@ -108,7 +108,7 @@ namespace Xamarin.Forms.Sandbox
 
 		public SecretViewModel()
 		{
-			NavigateCommand = new AsyncCommand(NavigateCommandExecute);
+			// NavigateCommand = new AsyncCommand(NavigateCommandExecute);
 			Navigation.InterceptNavigation[Key] = async () =>
 			{
 				if (IsNullOrEmpty(Name) || IsNullOrEmpty(Password))
@@ -120,15 +120,15 @@ namespace Xamarin.Forms.Sandbox
 			};
 		}
 
-		Task NavigateCommandExecute() => Navigation.GoToAsync(nameof(FinalViewModel), new Dictionary<string, object>
-		{
-			{nameof(Name), Name },
-			{nameof(Password), Password }
-		});
+		//Task NavigateCommandExecute() => Navigation.GoToAsync(nameof(FinalViewModel), new Dictionary<string, object>
+		//{
+		//	{nameof(Name), Name },
+		//	{nameof(Password), Password }
+		//});
 	}
 
-	[QueryProperty(nameof(Name), nameof(Name))]
-	[QueryProperty(nameof(Pass), "Password")]
+	//[QueryProperty(nameof(Name), nameof(Name))]
+	//[QueryProperty(nameof(Pass), "Password")]
 	sealed class FinalViewModel : BaseViewModel
 	{
 		string name;

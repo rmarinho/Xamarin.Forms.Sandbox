@@ -4,16 +4,30 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:Xamarin.Forms.Sandbox"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Não tão seguro assim...">
 
     <ContentPage.BindingContext>
         <vm:FinalViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.Content>
+    <StackLayout>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Label FontSize="Medium" Text="{Binding Name}" />
-            <Label FontSize="Large" Text="{Binding Pass}" />
+            <StackLayout.Effects>
+                <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
+            </StackLayout.Effects>
+            <Label FontSize="Medium" Text="{Binding Name}">
+                <Label.Effects>
+                    <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
+                </Label.Effects>
+            </Label>
+            <Label FontSize="Large" Text="{Binding Pass}">
+                <Label.Effects>
+                    <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
+                </Label.Effects>
+            </Label>
         </StackLayout>
-    </ContentPage.Content>
+        <Label x:Name="log" VerticalOptions="EndAndExpand" />
+    </StackLayout>
+
 </ContentPage>

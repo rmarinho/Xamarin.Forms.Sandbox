@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+using static System.Diagnostics.Debug;
 using Xamarin.Forms.Xaml;
 
 namespace Xamarin.Forms.Sandbox
@@ -16,5 +11,30 @@ namespace Xamarin.Forms.Sandbox
 		{
 			InitializeComponent();
 		}
+
+		void LifeCycleEffect_Loaded(object sender, EventArgs e) =>
+			log.Text += $"\n {Message(sender, true)}";
+
+		void LifeCycleEffect_Unloaded(object sender, EventArgs e) =>
+			WriteLine($"\n {Message(sender, false)}");
+
+
+		string Message(object sender, bool isLoaded)
+		{
+			if (sender is Label)
+				return $"Label {IsLoadedText(isLoaded)}";
+			if (sender is StackLayout)
+				return $"StackLayout {IsLoadedText(isLoaded)}";
+
+			return "Objeto não indentificado";
+
+			static string IsLoadedText(bool isLoaded) =>
+			isLoaded switch
+			{
+				true => "Carregada",
+				false => "Descarregada"
+			};
+		}
+
 	}
 }

@@ -70,11 +70,11 @@ namespace Xamarin.Forms.Sandbox
 			await CreateVMAndInit(url, args).ConfigureAwait(false);
 		}
 
-		public async Task GoToAsync(string url, IDictionary<string, object> @params)
-		{
-			await Shell.GoToAsync(url, @params);
-			await CreateVMAndInit(url).ConfigureAwait(false);
-		}
+		//public async Task GoToAsync(string url, IDictionary<string, object> @params)
+		//{
+		//	await Shell.GoToAsync(url, @params);
+		//	await CreateVMAndInit(url).ConfigureAwait(false);
+		//}
 
 		public async Task GoToAsync(ShellNavigationState state, object args = null)
 		{

@@ -5,11 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="Login">
-    <StackLayout VerticalOptions="CenterAndExpand">
-        <Button Command="{Binding LogInCommand}" Text="LogIn" />
-        <StackLayout Orientation="Horizontal" Spacing="3">
+    <Grid RowDefinitions="auto, auto" VerticalOptions="CenterAndExpand">
+        <Button
+            xct:TouchEffect.AnimationDuration="3000"
+            xct:TouchEffect.Command="{Binding LogInCommand}"
+            xct:TouchEffect.NormalBackgroundColor="Gold"
+            xct:TouchEffect.PressedBackgroundColor="red"
+            xct:TouchEffect.PressedRotation="45"
+            xct:TouchEffect.PulseCount="2"
+            HorizontalOptions="CenterAndExpand"
+            Text="LogIn"
+            WidthRequest="250" />
+        <StackLayout
+            Grid.Row="1"
+            Orientation="Horizontal"
+            Spacing="3">
             <CheckBox IsChecked="{Binding IsAdm}" />
             <Label Text="Admin mode" VerticalTextAlignment="Center" />
         </StackLayout>
-    </StackLayout>
+    </Grid>
 </ContentPage>

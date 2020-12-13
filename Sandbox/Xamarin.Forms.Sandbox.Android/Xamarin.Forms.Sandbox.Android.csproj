@@ -101,6 +101,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\calculator.png" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.CommunityToolkit">
+      <Version>1.0.0-preview2687</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

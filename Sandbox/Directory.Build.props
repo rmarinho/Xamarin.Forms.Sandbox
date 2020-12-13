@@ -5,7 +5,7 @@
     <IncludeMaps Condition="'$(IncludeMaps)' == ''">false</IncludeMaps>    
     <AbiBreakTest Condition="'$(AbiBreakTest)' == ''">false</AbiBreakTest>
     <FromSource Condition="'$(AbiBreakTest)' == 'true'">true</FromSource>
-    <XamarinFormsVersion>4.6.0.494-pre2</XamarinFormsVersion>  
+    <XamarinFormsVersion>5.0.0.1791-pre5</XamarinFormsVersion>  
     <DefineConstants Condition="'$(IncludeMaterial)' == 'true'">$(DefineConstants);VISUAL</DefineConstants>
   </PropertyGroup>
   
