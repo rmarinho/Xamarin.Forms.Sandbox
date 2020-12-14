@@ -13,18 +13,9 @@
 
     <StackLayout>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <StackLayout.Effects>
-                <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
-            </StackLayout.Effects>
             <Label FontSize="Medium" Text="{Binding Name}">
-                <Label.Effects>
-                    <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
-                </Label.Effects>
             </Label>
             <Label FontSize="Large" Text="{Binding Pass}">
-                <Label.Effects>
-                    <xct:LifeCycleEffect Loaded="LifeCycleEffect_Loaded" Unloaded="LifeCycleEffect_Unloaded" />
-                </Label.Effects>
             </Label>
         </StackLayout>
         <Label x:Name="log" VerticalOptions="EndAndExpand" />

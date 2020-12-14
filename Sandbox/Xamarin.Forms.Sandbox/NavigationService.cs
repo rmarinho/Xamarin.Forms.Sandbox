@@ -26,20 +26,22 @@ namespace Xamarin.Forms.Sandbox
 			Shell.Navigated += OnShellNavigated;
 			Shell.Navigating += OnShellNavigating;
 
-			static void RegisterRoutes()
-			{
-				Routing.RegisterRoute(nameof(MainViewModel), typeof(Page1));
-				Routing.RegisterRoute(nameof(StartViewModel), typeof(Page2));
-				Routing.RegisterRoute(nameof(SecretViewModel), typeof(SecretPage));
-				Routing.RegisterRoute(nameof(FinalViewModel), typeof(FinalPage));
-			}
+			
+		}
+
+		static void RegisterRoutes()
+		{
+			Routing.RegisterRoute(nameof(MainViewModel), typeof(Page1));
+			Routing.RegisterRoute(nameof(StartViewModel), typeof(Page2));
+			Routing.RegisterRoute(nameof(SecretViewModel), typeof(SecretPage));
+			Routing.RegisterRoute(nameof(FinalViewModel), typeof(FinalPage));
 		}
 
 		async void OnShellNavigating(object sender, ShellNavigatingEventArgs e)
 		{
 			var key = (CurrentPage.BindingContext as BaseViewModel).Key;
 			InterceptNavigation.TryGetValue(key, out var task);
-			if (task is { }) // task != null
+			if (task != null) // task != null
 			{
 				var deferral = e.GetDeferral();
 				var result = await task();

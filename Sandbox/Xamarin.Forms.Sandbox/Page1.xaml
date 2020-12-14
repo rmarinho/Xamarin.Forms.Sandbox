@@ -7,14 +7,9 @@
     Title="Login">
     <Grid RowDefinitions="auto, auto" VerticalOptions="CenterAndExpand">
         <Button
-            xct:TouchEffect.AnimationDuration="3000"
-            xct:TouchEffect.Command="{Binding LogInCommand}"
-            xct:TouchEffect.NormalBackgroundColor="Gold"
-            xct:TouchEffect.PressedBackgroundColor="red"
-            xct:TouchEffect.PressedRotation="45"
-            xct:TouchEffect.PulseCount="2"
             HorizontalOptions="CenterAndExpand"
             Text="LogIn"
+            Command="{Binding LogInCommand}"
             WidthRequest="250" />
         <StackLayout
             Grid.Row="1"

@@ -28,13 +28,19 @@ namespace Xamarin.Forms.Sandbox
 
 			return "Objeto não indentificado";
 
-			static string IsLoadedText(bool isLoaded) =>
-			isLoaded switch
-			{
-				true => "Carregada",
-				false => "Descarregada"
-			};
+			
 		}
-
+		static string IsLoadedText(bool isLoaded)
+		{
+			switch (isLoaded)
+			{
+				case true:
+					return "Carregada";
+				case false:
+					return "Descarregada";
+				default:
+					return "";
+			}
+		}
 	}
 }
